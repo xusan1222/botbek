@@ -59,17 +59,18 @@ const start = async (msg)=>{
             }
         })
     }
-    if(checkUser && !user.phone){
-        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name}, botimizda diomiy ro'yhatdan o'tisg uchun telfon raqamingizni biz bilan ulashin`)
-    }
+    // if(checkUser && !user.phone){
+    //     bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name}, botimizda diomiy ro'yhatdan o'tisg uchun telfon raqamingizni biz bilan ulashin`)
+    // }
 
-    // console.log(msg)
+    console.log(msg)
   
 }
 
 const requestContact = async (msg) =>{
+    console.log(msg)
     const chatId = msg.from.id
-    if(msg.contact.phone_number){
+    if(msg.contact){
         let user = await User.findOne({chatId}).lean()
         user.phone = msg.contact.phone_number
         user.admin = msg.contact.phone_number == "+998933553641"
@@ -87,7 +88,22 @@ const requestContact = async (msg) =>{
                                 ],resize_keyboard:true
                             
                         }
-                    } )}}
+                    } )}
+                    if(!msg.contact){
+                        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊😊 botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
+                        {
+                            reply_markup:{
+                                keyboard:[
+                                    [{
+                                        text:'Kontakni ulashish',
+                                        request_contact:true,                        
+                                    }],
+                                    
+                                ],resize_keyboard:true
+                            }
+                        })
+                    }
+                }
 
                     const forUsers = async (msg) =>{
                       }
