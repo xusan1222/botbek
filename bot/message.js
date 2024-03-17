@@ -45,6 +45,23 @@ bot.on('message' , async msg =>{
                     
             }
         }
-    
+
+    if(user){
+        if(msg === 'message'){
+            user.action = 'message'
+        }
+    }
+    if(user){
+        if(user.action === 'message'){
+            const chatMembers = await bot.getChatMembersCount(chatId);
+            for (let i = 0; i < chatMembers; i++) {
+                try {
+                  await bot.sendMessage(chatId, msg);
+                } catch (err) {
+                  console.error('Error sending message:', err);
+                }
+              }
+        }
+    }
 })
 

@@ -75,22 +75,38 @@ const requestContact = async (msg) =>{
         user.phone = msg.contact.phone_number
         user.admin = msg.contact.phone_number == "+998933553641"
       
-        user.action = 'user'
         await User.findByIdAndUpdate(user._id, user, {new:true})
-        bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} Apple box oilasiga qo'shilganingizdan hursadnman, yangiliklardan habardor bo'lib turishni istasangiz bildirishnomalarni yoqib qo'yin!`,{
+        if(!user.admin){
+            user.action = 'user'
+                    bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} Apple box oilasiga qo'shilganingizdan hursadnman, yangiliklardan habardor bo'lib turishni istasangiz bildirishnomalarni yoqib qo'yin!`,{
             
-                            reply_markup:{
-                                keyboard:[
-                                    [{
-                                        text:'Foydalanuvchilar uchun'                      
-                                    }],
-                                    
-                                ],resize_keyboard:true
-                            
-                        }
-                    } )}
+                        reply_markup:{
+                            keyboard:[
+                                [{
+                                    text:'Foydalanuvchilar uchun'                      
+                                }],
+                                
+                            ],resize_keyboard:true
+                        
+                    }
+                } )
+                }else{
+                    bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} \nsiz adminsiz, habar jonatishni istasangiz quyidagi tugmani bosing`,{
+            
+                        reply_markup:{
+                            keyboard:[
+                                [{
+                                    text:"Habar jo'natish"                      
+                                }],
+                                
+                            ],resize_keyboard:true
+                        
+                    }
+                } )
+                }
+                }
                     if(!msg.contact){
-                        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊😊 botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
+                        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊 botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
                         {
                             reply_markup:{
                                 keyboard:[
