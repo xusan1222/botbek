@@ -37,7 +37,7 @@ const start = async (msg)=>{
 // happy
     if(checkUser && user.phone){
         user.action = 'user'
-        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \nAgar sizga qandaydir yordam kerak bo'lsa \n☎️+998977045951 \n☎️++998953090707 \nraqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
+        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \nAgar sizga qandaydir yordam kerak bo'lsa \n☎️+998977045951 \n☎️+998953090707 \nraqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
         {
             reply_markup:{
                 inline_keyboard:[
@@ -51,7 +51,7 @@ const start = async (msg)=>{
                 ],
                 keyboard:[
                     [{
-                        text:'Foydalanuvchilar uchun👤'                      
+                        text:'Foydalanuvchilar uchun'                      
                     }],
                     
                 ],resize_keyboard:true
@@ -74,10 +74,12 @@ const requestContact = async (msg) =>{
         let user = await User.findOne({chatId}).lean()
         user.phone = msg.contact.phone_number
         user.admin = msg.contact.phone_number == "+998933553641"
-      
+        user.admin = msg.contact.phone_number == "+998977045951"
+        user.admin = msg.contact.phone_number == "+998953090707"
+        user.action = 'user' 
+        
         await User.findByIdAndUpdate(user._id, user, {new:true})
       
-            user.action = 'user'
                     bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} \nApple box oilasiga qo'shilganingizdan hursadnman🤩 \nYangiliklardan habardor bo'lib turishni istasangiz bildirishnomalarni yoqib qo'ying🔔✅`,{
             
                         reply_markup:{
@@ -108,11 +110,9 @@ const requestContact = async (msg) =>{
                     }
                 }
 
-                    const forUsers = async (msg) =>{
-                      }
+                  
 
 module.exports={
     start,
     requestContact,
-    forUsers
 }

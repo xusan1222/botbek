@@ -1,5 +1,5 @@
 const { bot} = require('./bot')
-const { start, requestContact, forUsers } = require('./helper/start')
+const { start, requestContact } = require('./helper/start')
 const User = require('../model/user')
 let hom = []
 
@@ -21,7 +21,6 @@ bot.on('message' , async msg =>{
     }
     if(user){
         if(user.action === 'user' ){
-            forUsers(msg)
             if(text === 'Foydalanuvchilar uchun'){
 
                 bot.sendMessage(chatId , `Muroojat uchun telfon raqam: \n☎️+998977045951 \n☎️+998953090707 Quyida bizni ijtimoiy tarmoqlarda kuzting🌐` , 
