@@ -35,7 +35,7 @@ const start = async (msg)=>{
 
     }
 // happy
-    if(checkUser && user.phone != ''){
+    if(checkUser && user.phone){
         user.action = 'user'
         bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \nAgar sizga qandaydir yordam kerak bo'lsa \n☎️+998977045951 \n☎️++998953090707 \nraqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
         {
