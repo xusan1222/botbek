@@ -20,12 +20,12 @@ const start = async (msg)=>{
             action:'request_contact'
         })
         await newUser.save()
-        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊 \n botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
+        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name}🤩 \nBotimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni📲 biz bilan ulashing`,
         {
             reply_markup:{
                 keyboard:[
                     [{
-                        text:'Kontakni ulashish',
+                        text:'Kontakni ulashish📲',
                         request_contact:true,                        
                     }],
                     
@@ -37,7 +37,7 @@ const start = async (msg)=>{
 // happy
     if(checkUser && user.phone != ''){
         user.action = 'user'
-        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \n  Agar sizga qandaydir yordam kerak bo'lsa +998977045951 raqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
+        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \nAgar sizga qandaydir yordam kerak bo'lsa \n☎️+998977045951 \n☎️++998953090707 \nraqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
         {
             reply_markup:{
                 inline_keyboard:[
@@ -51,7 +51,7 @@ const start = async (msg)=>{
                 ],
                 keyboard:[
                     [{
-                        text:'Foydalanuvchilar uchun'                      
+                        text:'Foydalanuvchilar uchun👤'                      
                     }],
                     
                 ],resize_keyboard:true
@@ -76,9 +76,9 @@ const requestContact = async (msg) =>{
         user.admin = msg.contact.phone_number == "+998933553641"
       
         await User.findByIdAndUpdate(user._id, user, {new:true})
-        if(!user.admin){
+      
             user.action = 'user'
-                    bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} Apple box oilasiga qo'shilganingizdan hursadnman, yangiliklardan habardor bo'lib turishni istasangiz bildirishnomalarni yoqib qo'yin!`,{
+                    bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} \nApple box oilasiga qo'shilganingizdan hursadnman🤩 \nYangiliklardan habardor bo'lib turishni istasangiz bildirishnomalarni yoqib qo'ying🔔✅`,{
             
                         reply_markup:{
                             keyboard:[
@@ -90,28 +90,15 @@ const requestContact = async (msg) =>{
                         
                     }
                 } )
-                }else{
-                    bot.sendMessage(chatId ,` Hurmatli ${msg.from.first_name} \nsiz adminsiz, habar jonatishni istasangiz quyidagi tugmani bosing`,{
-            
-                        reply_markup:{
-                            keyboard:[
-                                [{
-                                    text:"Habar jo'natish"                      
-                                }],
-                                
-                            ],resize_keyboard:true
-                        
-                    }
-                } )
-                }
+              
                 }
                     if(!msg.contact){
-                        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊 botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
+                        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name}🤩 \nBotimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni📲 biz bilan ulashing`,
                         {
                             reply_markup:{
                                 keyboard:[
                                     [{
-                                        text:'Kontakni ulashish',
+                                        text:'Kontakni ulashish📲',
                                         request_contact:true,                        
                                     }],
                                     

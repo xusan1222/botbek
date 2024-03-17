@@ -24,15 +24,14 @@ bot.on('message' , async msg =>{
             forUsers(msg)
             if(text === 'Foydalanuvchilar uchun'){
 
-                bot.sendMessage(chatId , `Ma'lumot uchun telfon raqam +998977045951 ${''} Quyida bizni ijtimoiy tarmoqlarda kuzting` , 
+                bot.sendMessage(chatId , `Muroojat uchun telfon raqam: \n☎️+998977045951 \n☎️++998953090707 Quyida bizni ijtimoiy tarmoqlarda kuzting🌐` , 
                 {
                     reply_markup:{
                         inline_keyboard:[
 
                                 [{"text": "Instagram", "url": "https://www.instagram.com/applebox.uz/"},],
-                                [{"text": "Telegram", "url": "https://t.me/wexvve"},],
-                                [{"text": "Bizning web sayt", "url": "http://www.google.com/"},],
-                                [{"text": "Murojaat uchun", "url": "https://t.me/wexvve"},],
+                                [{"text": "Telegram", "url": "https://t.me/Applebox_sergeli"},],
+                                [{"text": "Tez kunda bizning web sayt🌐", "url": "http://www.google.com/"},],
                             ],
                             
                         
@@ -45,23 +44,5 @@ bot.on('message' , async msg =>{
                     
             }
         }
-
-    if(user){
-        if(msg === 'message'){
-            user.action = 'message'
-        }
-    }
-    if(user){
-        if(user.action === 'message'){
-            const chatMembers = await bot.getChatMembersCount(chatId);
-            for (let i = 0; i < chatMembers; i++) {
-                try {
-                  await bot.sendMessage(chatId, msg);
-                } catch (err) {
-                  console.error('Error sending message:', err);
-                }
-              }
-        }
-    }
 })
 
