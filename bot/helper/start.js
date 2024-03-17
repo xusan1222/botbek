@@ -20,7 +20,7 @@ const start = async (msg)=>{
             action:'request_contact'
         })
         await newUser.save()
-        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊😊 botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
+        bot.sendMessage(chatId , `Assalomu aleykum hurmatli ${msg.from.first_name},😊 \n botimizda diomiy ro'yhatdan o'tish uchun telfon raqamingizni biz bilan ulashing`,
         {
             reply_markup:{
                 keyboard:[
@@ -35,9 +35,9 @@ const start = async (msg)=>{
 
     }
 // happy
-    if(checkUser && user.phone){
+    if(checkUser && user.phone != ''){
         user.action = 'user'
-        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 agar sizga qandaydir yordam kerak bo'lsa +998977045951 raqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
+        bot.sendMessage(chatId , `Hurmatli ${ msg.from.first_name } siz bizning doimiy foydalinuvchimizsiz 😊🤝 \n  Agar sizga qandaydir yordam kerak bo'lsa +998977045951 raqami orqali yoki quyida bizning ijtimoiy tarmoqlarimiz oraqali biz bilan bog'laning  ` , 
         {
             reply_markup:{
                 inline_keyboard:[
