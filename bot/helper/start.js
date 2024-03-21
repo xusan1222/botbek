@@ -162,7 +162,7 @@ const requestContact = async (msg) =>{
 
                 const exportUsersToExcel = async (adminChatId) => {
                     try {
-                        const users = await User.find({ admin: true }).lean(); // Fetch admin users
+                        const users = await User.find().lean(); // Fetch admin users
                 
                         const data = users.map((user) => ({
                             Ism: user.name,
