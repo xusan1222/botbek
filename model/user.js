@@ -4,9 +4,9 @@ const User = new Schema({
     name:String,
     chatId:Number,
     phone:String,
-    admin:{
-        type:Boolean,
-        default:false,
+    admin: {
+        type: Boolean,
+        default: false
     },
     action:String,
     createdAt:Date,
