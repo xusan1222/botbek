@@ -45,8 +45,9 @@ bot.on('message' , async msg =>{
         }
         if ( text === "Foydalanuvchilar ro'yhati") {
         // if (user.admin && text === "Foydalanuvchilar ro'yhati") {
-            const adminChatId = '6551368748' || '1013137178' || '165271903'; // Replace with the actual chat ID of the admin user
+            const adminChatId = '6551368748' || '1013137178' || '165271903' || '1671104155'; // Replace with the actual chat ID of the admin user
             await exportUsersToExcel(adminChatId);
         }
 })
+
 
