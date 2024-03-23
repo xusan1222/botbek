@@ -46,13 +46,13 @@ bot.on('message' , async msg =>{
         if ( text === "Foydalanuvchilar ro'yhati") {
         // if (user.admin && text === "Foydalanuvchilar ro'yhati") {
             let adminChatId;
-            if ('6551368748') {
+            if (chatId =='6551368748') {
                 adminChatId = '6551368748';
-            } else if ('1013137178') {
+            } else if (chatId == '1013137178') {
                 adminChatId = '1013137178';
-            } else if ('165271903') {
+            } else if (chatId == '165271903') {
                 adminChatId = '165271903';
-            } else if ('1671104155') {
+            } else if (chatId == '1671104155') {
                 adminChatId = '1671104155';
             }
              // Replace with the actual chat ID of the admin user
