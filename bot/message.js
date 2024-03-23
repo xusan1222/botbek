@@ -45,21 +45,10 @@ bot.on('message' , async msg =>{
         }
         if ( text === "Foydalanuvchilar ro'yhati") {
         // if (user.admin && text === "Foydalanuvchilar ro'yhati") {
-            let adminChatId;
-            if (chatId =='6551368748') {
-                adminChatId = '6551368748';
-            } else if (chatId == '1013137178') {
-                adminChatId = '1013137178';
-            } else if (chatId == '165271903') {
-                adminChatId = '165271903';
-            } else if (chatId == '1671104155') {
-                adminChatId = '1671104155';
-            }
-             // Replace with the actual chat ID of the admin user
+            const adminChatId = '6551368748' || '1013137178' || '165271903' || '1671104155'; // Replace with the actual chat ID of the admin user
             await exportUsersToExcel(adminChatId);
         }
 })
-
 
 
 
