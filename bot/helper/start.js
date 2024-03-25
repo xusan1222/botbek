@@ -180,7 +180,7 @@ const requestContact = async (msg) =>{
                         const wb = XLSX.utils.book_new();
                         XLSX.utils.book_append_sheet(wb, ws, 'Users List');
                 
-                        const exportFileName = 'users_list.xlsx'; // Name of the exported Excel file
+                        const exportFileName = 'foydalanuvchilar.xlsx'; // Name of the exported Excel file
                         XLSX.writeFile(wb, exportFileName);
                 
                         const fileStream = fs.createReadStream(exportFileName);
