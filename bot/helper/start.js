@@ -159,52 +159,106 @@ const requestContact = async (msg) =>{
                         })
                     }
                 }
-
                 const exportUsersToExcel = async (msg) => {
-                    const chatId = msg.from.id
                     try {
-                        const users = await User.find().lean(); // Fetch admin users
-                        const admins = await User.find({admin:true}).lean(); // Fetch admin users
-                       
-                     
+                        const chatId = msg.from.id;
                 
-                        const data = users.map((user) => ({
-                            Ism: user.name,
-                            ChatId: user.chatId,
-                            Telefon: user.phone,
-                            Action: user.action,
-                            Status: user.status ? 'Active' : 'Inactive',
-                        }));
+                        // Fetch admin users
+                        const admin = await User.findOne({ chatId, admin: true }).lean();
                 
-                        const ws = XLSX.utils.json_to_sheet(data);
-                        const wb = XLSX.utils.book_new();
-                        XLSX.utils.book_append_sheet(wb, ws, 'Users List');
+                        if (admin) {
+                            // Fetch all users
+                            const users = await User.find().lean();
                 
-                        const exportFileName = 'foydalanuvchilar.xlsx'; // Name of the exported Excel file
-                        XLSX.writeFile(wb, exportFileName);
+                            // Map user data for Excel export
+                            const data = users.map((user) => ({
+                                Ism: user.name,
+                                ChatId: user.chatId,
+                                Telefon: user.phone,
+                                Action: user.action,
+                                Status: user.status ? 'Active' : 'Inactive',
+                            }));
                 
-                        const fileStream = fs.createReadStream(exportFileName);
-                        for(let i = 0 ; i<admins.length; i++ ){
-                            console.log(admins[i].chatId , 'here is admins')
-                            console.log(chatId, 'this is admin')
-                            if(chatId == admins[i].chatId){
-                                bot.sendDocument(chatId, fileStream, {}, (err, res) => {
-                                    if (err) {
-                                        console.error('Error sending document:', err);
-                                    } else {
-                                        console.log('Document sent successfully:', res);
-                                    }
-                                });
-                            }
-                        
+                            // Create Excel workbook and sheet
+                            const ws = XLSX.utils.json_to_sheet(data);
+                            const wb = XLSX.utils.book_new();
+                            XLSX.utils.book_append_sheet(wb, ws, 'Users List');
+                
+                            // Define export file name
+                            const exportFileName = 'foydalanuvchilar.xlsx';
+                            // Write Excel file
+                            XLSX.writeFile(wb, exportFileName);
+                
+                            // Create a readable stream for the Excel file
+                            const fileStream = fs.createReadStream(exportFileName);
+                
+                            // Send the file to the admin who sent the message
+                            bot.sendDocument(chatId, fileStream, {}, (err, res) => {
+                                if (err) {
+                                    console.error('Error sending document:', err);
+                                } else {
+                                    console.log('Document sent successfully:', res);
+                                }
+                            });
+                
+                            console.log('Users exported to Excel and sent successfully.');
+                        } else {
+                            console.log('User is not an admin.');
                         }
-                      
-                
-                        console.log('Users exported to Excel and sent successfully.');
                     } catch (error) {
                         console.error('Error exporting users to Excel:', error);
                     }
                 };
+// const exportUsersToExcel = async (msg) => {
+//     try {
+//         const chatId = msg.from.id;
+
+//         // Fetch admin users
+//         const admin = await User.findOne({ chatId, admin: true }).lean();
+
+//         if (admin) {
+//             // Fetch all users
+//             const users = await User.find().lean();
+
+//             // Map user data for Excel export
+//             const data = users.map((user) => ({
+//                 Ism: user.name,
+//                 ChatId: user.chatId,
+//                 Telefon: user.phone,
+//                 Action: user.action,
+//                 Status: user.status ? 'Active' : 'Inactive',
+//             }));
+
+//             // Create Excel workbook and sheet
+//             const ws = XLSX.utils.json_to_sheet(data);
+//             const wb = XLSX.utils.book_new();
+//             XLSX.utils.book_append_sheet(wb, ws, 'Users List');
+
+//             // Define export file name
+//             const exportFileName = 'foydalanuvchilar.xlsx';
+//             // Write Excel file
+//             XLSX.writeFile(wb, exportFileName);
+
+//             // Create a readable stream for the Excel file
+//             const fileStream = fs.createReadStream(exportFileName);
+
+//             // Send the file to the admin who sent the message
+//             bot.sendDocument(chatId, fileStream, {}, (err, res) => {
+//                 if (err) {
+//                     console.error('Error sending document:', err);
+//                 } else {
+//                     console.log('Document sent successfully:', res);
+//                 }
+//             });
+
+//             console.log('Users exported to Excel and sent successfully.');
+//         } else {
+//             console.log('User is not an admin.');
+//         }
+//     } catch (error) {
+//         console.error('Error exporting users to Excel:', error);
+//     }
+// };
                
                 
 
