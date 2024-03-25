@@ -185,6 +185,8 @@ const requestContact = async (msg) =>{
                 
                         const fileStream = fs.createReadStream(exportFileName);
                         for(let i = 0 ; i<admins.length; i++ ){
+                            console.log(admins[i].chatId , 'here is admins')
+                            console.log(chatId, 'this is admin')
                             if(chatId == admins[i].chatId){
                                 bot.sendDocument(chatId, fileStream, {}, (err, res) => {
                                     if (err) {
