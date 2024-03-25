@@ -102,7 +102,7 @@ const requestContact = async (msg) =>{
             user.admin = true;
         } else if (msg.contact.phone_number === "+998977045951") {
             user.admin = true;
-        } else if (msg.contact.phone_number === "+998953090707") {
+        } else if (msg.contact.phone_number === "+998935916561") {
             user.admin = true;
         }
         user.action = 'user' 
@@ -160,9 +160,13 @@ const requestContact = async (msg) =>{
                     }
                 }
 
-                const exportUsersToExcel = async (adminChatId) => {
+                const exportUsersToExcel = async (msg) => {
+                    const chatId = msg.from.id
                     try {
                         const users = await User.find().lean(); // Fetch admin users
+                        const admins = await User.find({admin:true}).lean(); // Fetch admin users
+                       
+                     
                 
                         const data = users.map((user) => ({
                             Ism: user.name,
@@ -180,20 +184,26 @@ const requestContact = async (msg) =>{
                         XLSX.writeFile(wb, exportFileName);
                 
                         const fileStream = fs.createReadStream(exportFileName);
-                        
-                        bot.sendDocument(adminChatId, fileStream, {}, (err, res) => {
-                            if (err) {
-                                console.error('Error sending document:', err);
-                            } else {
-                                console.log('Document sent successfully:', res);
+                        for(let i = 0 ; i<admins.length; i++ ){
+                            if(chatId == admins[i].chatId){
+                                bot.sendDocument(chatId, fileStream, {}, (err, res) => {
+                                    if (err) {
+                                        console.error('Error sending document:', err);
+                                    } else {
+                                        console.log('Document sent successfully:', res);
+                                    }
+                                });
                             }
-                        });
+                        
+                        }
+                      
                 
                         console.log('Users exported to Excel and sent successfully.');
                     } catch (error) {
                         console.error('Error exporting users to Excel:', error);
                     }
                 };
+               
                 
 
 module.exports={
